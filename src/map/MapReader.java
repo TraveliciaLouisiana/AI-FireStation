@@ -1,3 +1,5 @@
+package map; // class ini berada di package map
+
 import java.io.*;
 import java.util.*;
 

@@ -1,3 +1,5 @@
+package map; // class ini berada di package map
+
 /**
  * Class Grid: nyimpen semua informasi peta yang dipakai bagian lain program.
  * koordinat: 0-based
