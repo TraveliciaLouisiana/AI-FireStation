@@ -20,6 +20,8 @@ public class GeneticAlgorithmEngine {
     private final List<Individual> population; // menyimpan daftar individu dalam populasi
     private int evaluationCount; // menghitung jumlah evaluasi fitness yang sudah dilakukan
     private long startTimeMillis; // mencatat waktu mulai eksekusi dalam milidetik
+    private int generationCount; // menghitung jumlah generasi yang sudah dijalankan (untuk laporan CSV)
+    private String stopReason = "BUDGET_HABIS"; // alasan berhenti: BUDGET_HABIS, STAGNAN, atau WAKTU_HABIS
 
     // membuat mesin ga dengan grid, matriks jarak hasil bfs, random seed, dan konfigurasi
     public GeneticAlgorithmEngine(Random random, Grid grid, int[][] distanceMatrix, GAConfig config) { // constructor utama
@@ -76,6 +78,8 @@ public class GeneticAlgorithmEngine {
     public Individual run() { // method utama menjalankan GA
         startTimeMillis = System.currentTimeMillis(); // catat waktu mulai program
         initializePopulation(); // panggil inisialisasi populasi awal
+        generationCount = 0; // reset hitungan generasi
+        stopReason = "BUDGET_HABIS"; // anggap berhenti karena budget kecuali ditemukan alasan lain
 
         if (population.isEmpty()) { // cek apakah populasi kosong
             throw new IllegalStateException("populasi kosong, tidak ada individu yang dapat dievaluasi"); // lempar error jika kosong
@@ -141,6 +145,7 @@ public class GeneticAlgorithmEngine {
             population.clear(); // kosongkan populasi lama
             population.addAll(newPopulation); // masukkan populasi baru
             Collections.sort(population); // urutkan populasi berdasarkan fitness
+            generationCount++; // satu generasi selesai
 
             // stagnasi dihitung dari perubahan cost terbaik antargenerasi
             double currentBestCost = population.get(0).getCost(); // ambil cost terbaik saat ini
@@ -154,10 +159,14 @@ public class GeneticAlgorithmEngine {
             // nilai 0 pada stagnationlimit berarti pemeriksaan stagnasi dinonaktifkan
             if (config.getStagnationLimit() > 0
                     && stagnantGenerations >= config.getStagnationLimit()) { // cek apakah batas stagnasi tercapai
+                stopReason = "STAGNAN"; // catat alasan berhenti
                 break; // keluar dari perulangan utama
             } 
         } 
 
+        if (stopReason.equals("BUDGET_HABIS") && evaluationCount < config.getEvaluationBudget()) { // berhenti padahal budget belum habis
+            stopReason = "WAKTU_HABIS"; // berarti penyebabnya batas waktu
+        } 
         return population.get(0); // kembalikan individu terbaik dari hasil akhir
     } 
 
@@ -210,6 +219,9 @@ public class GeneticAlgorithmEngine {
         return limit > 0 && System.currentTimeMillis() - startTimeMillis >= limit; // cek apakah waktu sekarang melebihi limit
     } 
 
+    public int getGenerationCount() { return generationCount; } // getter jumlah generasi
+    public String getStopReason() { return stopReason; } // getter alasan berhenti
+
     public int getEvaluationCount() { // getter untuk jumlah evaluasi
         return evaluationCount; // kembalikan nilai evaluation count
     } 
@@ -222,4 +234,4 @@ public class GeneticAlgorithmEngine {
     public Individual getBestIndividual() { // getter individu terbaik
         return population.isEmpty() ? null : population.get(0); // kembalikan individu pertama atau null jika kosong
     } 
-} 
+}

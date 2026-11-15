@@ -10,7 +10,7 @@ public class SeedGenerator{
 
     //Method 1: Membuat sejumlah seed berdasarkan NPM Ketua
     public static int[] buat(long npmKetua, int jumlah){
-        Random random = new Random(npmKetua);   //buat objek random
+        Random random = new Random(npmKetua);    //buat objek random
         int batas = 65536;                      //batas angka seed 2^16   
         int[] seed = new int[jumlah];           //array untuk menyimpan hasil seed    
         

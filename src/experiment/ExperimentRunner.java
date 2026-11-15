@@ -113,7 +113,7 @@ public class ExperimentRunner {
             }
 
             // menyiapkan data hasil percobaan untuk disimpan ke CSV
-            String[] data = new String[25];
+            String[] data = new String[PenulisCsv.KOLOM.length];
 
             // menyimpan identitas dan konfigurasi percobaan
             data[0] = e.id();

@@ -22,9 +22,9 @@ public class MapGenerator {
 
         //memberi label panjang sisi berdasarkan nama ukuran peta
         switch (ukuran) {
-            case "tiny": return 10; // ukuran 10 x 10
-            case "small": return 20; // ukuran 20 x 20
-            case "normal": return 40; // ukuran 40 x 40
+            case "tiny": return 20; // ukuran 10 x 10
+            case "small": return 40; // ukuran 20 x 20
+            case "normal": return 60; // ukuran 40 x 40
             case "large": return 80; // ukuran 80 x 80
 
             // menghentikan program jika ukuran tidak dikenal

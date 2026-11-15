@@ -4,8 +4,7 @@ import java.io.*;
 import java.util.*;
 
 //class untuk menyimpan informasi setiap peta dan mengelola katalog peta dalam file CSV.
-//katalog ini digunakan agar program bisa mengetahui informasi setiap peta tanpa harus membaca dan menghitung ulang semuanya.
-//informasi yang disimpan meliputi ukuran peta, jumlah rumah, pohon, sel kosong, dan seed peta.
+//informasi yang disimpan adalah ukuran peta, jumlah rumah, pohon, sel kosong, dan seed peta.
 
 public class InfoPeta {
     //menyimpan informasi dasar dari sebuah peta.
