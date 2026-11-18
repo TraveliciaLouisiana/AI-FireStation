@@ -1,0 +1,6 @@
+ukuran,alasan,jumlah,persen,rata_persen_budget_terpakai
+tiny (20x20),BUDGET_HABIS,1437,74.84,97.65
+tiny (20x20),STAGNAN,483,25.16,97.65
+small (40x40),BUDGET_HABIS,168,8.75,57.11
+small (40x40),STAGNAN,1752,91.25,57.11
+normal (60x60),STAGNAN,1920,100.0,20.33
