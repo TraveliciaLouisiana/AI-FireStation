@@ -4,7 +4,6 @@ package experiment; // class ini berada di package experiment
 // Hasil ini dikirim dari AdapterGA ke Runner.
 
 // class berisi informasi hasil eksperimen (cost, solusi terbaik, jumlah evaluasi, dan status eksperimen)
-// Data akan digunakan oleh Runner untuk diperiksa dan disimpan ke dalam file CSV.
 
 public class HasilRun {
     public double cost;            //rata-rata jarak rumah ke FS terdekat dari solusi terbaik
