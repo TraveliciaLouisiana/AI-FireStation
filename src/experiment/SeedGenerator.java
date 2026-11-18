@@ -35,36 +35,4 @@ public class SeedGenerator{
             }
         }
     }
-
-    //Method 3: Membaca seed dari file dan mengembalikannya dalam bentuk array int
-    public static int[] readSeeds(String path) throws IOException{
-        
-        //membuat arraylist nilai untuk menampung seed yang dibaca dari file
-        List<Integer> nilai = new ArrayList<>();    //pakai arraylist karena jumlah data belum diketahui
-        
-        //membuka file untuk dibaca
-        try(Scanner sc = new Scanner(new File(path))){
-
-            //akan dibaca selama masih ada data bertipe int
-            while (sc.hasNextInt()) {
-                nilai.add(sc.nextInt()); //memasukan data ke arraylist
-            }
-        }
-
-        //Memastikan jumlah seed yang dibaca tepat 30
-        if(nilai.size() != 30){
-            throw new IllegalArgumentException(path + " harus berisi tepat 30 seed");
-        }
-
-        //Membuat array int dengan ukuran menyesuaikan jumlah data
-        int[] seed = new int[nilai.size()];
-        
-        //Looping untuk memidnahkan data dari arraylist ke array
-        for (int i = 0; i < seed.length; i++) {
-            seed[i] = nilai.get(i);
-        }
-
-        //mengembalikan array yang sudah berisi 30 seed
-        return seed;
-    }
 }
