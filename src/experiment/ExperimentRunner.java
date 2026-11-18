@@ -191,11 +191,7 @@ public class ExperimentRunner {
                 double detik = (System.currentTimeMillis() - mulai) / 1000.0;
 
                 // menampilkan jumlah percobaan dan hasil sementara
-                System.out.printf(
-                    Locale.US,
-                    "[%d/%d] sukses=%d gagal=%d dilewati=%d (%.0f detik)%n",
-                    urut, total, sukses, gagal, dilewati, detik
-                );
+                System.out.printf(Locale.US, "[%d/%d] sukses=%d gagal=%d dilewati=%d (%.0f detik)%n", urut, total, sukses, gagal, dilewati, detik);
             }
         }
 
@@ -204,8 +200,7 @@ public class ExperimentRunner {
 
         // menampilkan peringatan jika ada percobaan yang melebihi budget
         if (melebihiBudget > 0) {
-            System.out.println("PERINGATAN: " + melebihiBudget +"  periksa GA"
-            );
+            System.out.println("PERINGATAN: " + melebihiBudget +"  periksa GA");
         }
 
         // memberi tahu pengguna jika ada percobaan yang gagal

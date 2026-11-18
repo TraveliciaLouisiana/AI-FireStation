@@ -8,6 +8,21 @@ import java.util.*; // untuk menggunakan List, ArrayList, dan Arrays
 // setiap run nantinya dapat dicatat sebagai satu baris di CSV
 public class PenyusunEksperimen {
 
+    // batas evaluasi fitness menurut ukuran peta
+    private static int budget(String ukuran) {
+        if (ukuran.equals("tiny")) {
+            return 10000;
+        } else if (ukuran.equals("small")) {
+            return 50000;
+        } else if (ukuran.equals("normal")) {
+            return 200000;
+        } else if (ukuran.equals("large")) {
+            return 500000;
+        } else {
+            throw new IllegalArgumentException("Ukuran tidak dikenal: " + ukuran);
+        }
+    }
+
     // membuat daftar run untuk satu model berdasarkan kumpulan peta, parameter, dan seed
     // digunakan oleh Tahap 1, Tahap 2A, dan Tahap 2B
     public static List<Experiment> susun(String tahap, List<InfoPeta> peta, KonfigurasiModel model, List<ParameterGA> daftarParam, int[] seed) {
@@ -29,7 +44,7 @@ public class PenyusunEksperimen {
                     e.model = model; //simpan kombinasi model GA yang digunakan
                     e.param = prm; //simpan nilai hyperparameter yang digunakan
                     e.seed = s; //simpan seed yang digunakan pada percobaan ini
-                    e.budget = MapGenerator.budget(pt.ukuran); //menentukan batas evaluasi berdasarkan ukuran peta
+                    e.budget = budget(pt.ukuran); //menentukan batas evaluasi berdasarkan ukuran peta
 
                     //masukan satu run yang sudah lengkap ke dalam daftar hasil
                     hasil.add(e);

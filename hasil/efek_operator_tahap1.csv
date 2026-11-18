@@ -1,0 +1,9 @@
+faktor,pilihan,jumlah_model,rata_peringkat
+representasi,INDEX_LIST,8,9.5677
+representasi,BIT_STRING,8,7.4323
+seleksi,TOURNAMENT,8,12.1562
+seleksi,ROULETTE_WHEEL,8,4.8438
+crossover,ONE_POINT,8,9.1562
+crossover,UNIFORM,8,7.8438
+mutasi,MOVE_ONE,8,7.0156
+mutasi,MOVE_TWO,8,9.9844
