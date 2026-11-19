@@ -1,0 +1,59 @@
+2026.11.18 21:27:55 INFO  Tracing is disabled for protocol LSP. To enable tracing of incoming and outgoing JSON messages, create an empty file at d:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\.metals\lsp.trace.json or C:\Users\Vilya\AppData\Local\scalameta\metals\cache\lsp.trace.json
+2026.11.18 21:27:59 INFO  logging to files D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\.metals\metals.log
+2026.11.18 21:27:59 INFO  Started: Metals version 1.6.9 in folders 'D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI' for client Visual Studio Code 1.145.2.
+2026.11.18 21:27:59 INFO  Memory monitor started
+2026.11.18 21:28:03 WARN  Using H2 2.5.250 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.11.18 21:28:05 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.18 21:28:05 WARN  no build tool detected in workspace 'D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2026.11.18 21:28:06 WARN  Build server is not auto-connectable.
+2026.11.18 21:28:06 WARN  no build target for: D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java
+2026.11.18 21:28:06 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.18 21:28:11 WARN  Running javac-semanticdb failed for file:///D:/Data/Life/UNPAR/SEM%207/AI/Tubes-AI/src/experiment/Main.java. Output:
+
+2026.11.18 21:28:15 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.18 21:28:18 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.18 21:28:30 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.18 21:34:03 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.18 21:35:27 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.18 21:49:13 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 05:06:09 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 05:06:09 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 05:28:30 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 05:29:00 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 08:16:03 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 08:16:03 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 08:16:05 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 08:16:05 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 11:08:32 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 11:34:44 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 11:38:05 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+Nov 19, 2026 1:42:31 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2026.11.19 13:42:31 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+Nov 19, 2026 1:43:40 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2026.11.19 13:43:40 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 15:37:01 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+Nov 19, 2026 3:37:02 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Nov 19, 2026 3:37:06 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Nov 19, 2026 3:37:09 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Nov 19, 2026 3:37:13 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2026.11.19 15:37:44 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 15:39:05 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 15:39:08 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 15:39:36 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+2026.11.19 15:39:52 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+Nov 19, 2026 3:39:53 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 64
+Nov 19, 2026 3:41:05 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2026.11.19 15:41:07 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+Nov 19, 2026 3:41:12 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2026.11.19 15:41:14 INFO  no build target found for D:\Data\Life\UNPAR\SEM 7\AI\Tubes-AI\src\experiment\Main.java. Using fallback presentation compiler.
+Nov 19, 2026 3:41:19 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
