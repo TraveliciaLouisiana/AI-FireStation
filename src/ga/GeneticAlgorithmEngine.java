@@ -1,14 +1,11 @@
 package ga; // class ini berada di package ga
 
-import chromosome.BitStringChromosome; // pakai class BitStringChromosome dari package chromosome
-import chromosome.Chromosome; // pakai class Chromosome dari package chromosome
+import chromosome.*; // pakai semua class kromosom (BitString, IndexList, Repair, Chromosome)
 import map.Grid; // pakai class Grid dari package map
-import chromosome.IndexListChromosome; // pakai class IndexListChromosome dari package chromosome
-import chromosome.Repair; // pakai class Repair dari package chromosome
-import java.util.ArrayList; 
-import java.util.Collections; 
-import java.util.List; 
-import java.util.Random; 
+import operator.crossover.*; // pakai operator crossover (OnePoint, Uniform)
+import operator.mutation.*; // pakai operator mutasi (MoveOne, MoveTwo)
+import operator.selection.*; // pakai operator seleksi (Tournament, RouletteWheel)
+import java.util.*; // pakai ArrayList, Collections, List, Random
 
 /* class GeneticAlgorithmEngine: menjalankan siklus genetic algorithm untuk masalah penempatan fire station */
 public class GeneticAlgorithmEngine { 
@@ -22,6 +19,10 @@ public class GeneticAlgorithmEngine {
     private long startTimeMillis; // mencatat waktu mulai eksekusi dalam milidetik
     private int generationCount; // menghitung jumlah generasi yang sudah dijalankan (untuk laporan CSV)
     private String stopReason = "BUDGET_HABIS"; // alasan berhenti: BUDGET_HABIS, STAGNAN, atau WAKTU_HABIS
+    // operator genetik yang dipilih dari config (package operator)
+    private final SelectionOperator selection;
+    private final CrossoverOperator crossover;
+    private final MutationOperator mutation;
 
     // membuat mesin ga dengan grid, matriks jarak hasil bfs, random seed, dan konfigurasi
     public GeneticAlgorithmEngine(Random random, Grid grid, int[][] distanceMatrix, GAConfig config) { // constructor utama
@@ -37,8 +38,35 @@ public class GeneticAlgorithmEngine {
         this.config = config; // mengisi variabel config
         this.population = new ArrayList<>(); // menginisialisasi list populasi kosong
         this.evaluationCount = 0; // set hitungan evaluasi awal ke nol
+        this.selection = createSelection(config);
+        this.crossover = createCrossover(config);
+        this.mutation = createMutation(config);
         validateDistanceMatrix(); // memanggil method untuk validasi ukuran matriks jarak
-    } 
+    }
+
+    // membuat operator seleksi sesuai SelectionType di config
+    private static SelectionOperator createSelection(GAConfig config) {
+        if (config.getSelectionType() == GAConfig.SelectionType.ROULETTE_WHEEL) {
+            return new RouletteWheelSelection();
+        }
+        return new TournamentSelection(config.getTournamentSize());
+    }
+
+    // membuat operator crossover sesuai CrossoverType di config
+    private static CrossoverOperator createCrossover(GAConfig config) {
+        if (config.getCrossoverType() == GAConfig.CrossoverType.ONE_POINT) {
+            return new OnePointCrossover();
+        }
+        return new UniformCrossover();
+    }
+
+    // membuat operator mutasi sesuai MutationType di config
+    private static MutationOperator createMutation(GAConfig config) {
+        if (config.getMutationType() == GAConfig.MutationType.MOVE_TWO) {
+            return new MoveTwoMutation();
+        }
+        return new MoveOneMutation();
+    }
 
     // memastikan matriks bfs memiliki satu baris per rumah dan satu kolom per sel kosong
     private void validateDistanceMatrix() { // method validasi matriks
@@ -110,15 +138,15 @@ public class GeneticAlgorithmEngine {
 
                 // crossover dilakukan berdasarkan probabilitas pc
                 if (random.nextDouble() < config.getCrossoverRate()) { // cek apakah terjadi crossover
-                    child = parent1.getChromosome().crossover(
-                            parent2.getChromosome(), config.getCrossoverType(), random); // lakukan crossover
+                    child = crossover.crossover(
+                            parent1.getChromosome(), parent2.getChromosome(), grid, random); // lakukan crossover
                 } else { 
                     child = parent1.getChromosome().copy(); // salin saja dari parent pertama
                 } 
 
                 // mutasi dilakukan berdasarkan probabilitas pm
                 if (random.nextDouble() < config.getMutationRate()) { // cek apakah terjadi mutasi
-                    child.mutate(config.getMutationType(), random); // lakukan mutasi pada anak
+                    child = mutation.mutate(child, grid, random); // lakukan mutasi pada anak
                 } 
 
                 // validasi akhir mencegah kromosom invalid masuk ke populasi
@@ -170,48 +198,10 @@ public class GeneticAlgorithmEngine {
         return population.get(0); // kembalikan individu terbaik dari hasil akhir
     } 
 
-    // memilih parent dengan metode yang ditentukan di konfigurasi
+    // memilih parent memakai operator seleksi yang dipilih di konfigurasi
     private Individual selectParent() { // method pemilihan parent
-        if (config.getSelectionType() == GAConfig.SelectionType.ROULETTE_WHEEL) { // cek apakah pakai roulette wheel
-            return selectParentRouletteWheel(); // panggil seleksi roulette wheel
-        } 
-        return selectParentTournament(); // jika tidak, panggil tournament selection
-    } 
-
-    // tournament selection: ambil k kandidat acak dan pilih fitness tertinggi
-    private Individual selectParentTournament() { // method tournament selection
-        Individual best = null; // inisialisasi individu terbaik sebagai null
-        for (int i = 0; i < config.getTournamentSize(); i++) { // perulangan sebanyak ukuran turnamen
-            Individual candidate = population.get(random.nextInt(population.size())); // ambil kandidat acak dari populasi
-            if (best == null || candidate.getFitness() > best.getFitness()) { // bandingkan fitness kandidat dengan yang terbaik
-                best = candidate; // update kandidat terbaik jika lebih tinggi
-            } 
-        } 
-        return best; // kembalikan individu terbaik hasil turnamen
-    } 
-
-    // roulette wheel: peluang terpilih sebanding dengan fitness positif setiap individu
-    private Individual selectParentRouletteWheel() { // method roulette wheel selection
-        double totalFitness = 0.0; // siapkan variabel total fitness
-        for (Individual individual : population) { // perulangan untuk menjumlahkan seluruh fitness
-            totalFitness += individual.getFitness(); // tambahkan fitness individu ke total
-        } 
-
-        // fallback defensif jika total fitness tidak positif atau tidak valid
-        if (totalFitness <= 0.0 || Double.isInfinite(totalFitness) || Double.isNaN(totalFitness)) { // cek validitas total fitness
-            return population.get(random.nextInt(population.size())); // ambil individu acak sebagai cadangan
-        } 
-
-        double target = random.nextDouble() * totalFitness; // tentukan target acak dalam rentang total fitness
-        double cumulativeFitness = 0.0; // siapkan variabel fitness kumulatif
-        for (Individual individual : population) { // perulangan mengecek tiap individu
-            cumulativeFitness += individual.getFitness(); // tambahkan fitness ke kumulatif
-            if (cumulativeFitness >= target) { // jika kumulatif sudah melewati atau sama dengan target
-                return individual; // kembalikan individu tersebut
-            } 
-        } 
-        return population.get(population.size() - 1); // kembalikan individu terakhir sebagai pengaman
-    } 
+        return selection.select(population, random); // delegasikan ke operator seleksi
+    }
 
     // mengembalikan true jika batas waktu aktif dan sudah terlampaui 
     private boolean isTimeLimitReached() { // method pengecekan batas waktu

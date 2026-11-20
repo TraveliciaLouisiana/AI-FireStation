@@ -1,9 +1,6 @@
 package chromosome; // class ini berada di package chromosome
 
-import ga.GAConfig; // pakai class GAConfig dari package ga
 import map.Grid; // pakai class Grid dari package map
-import java.util.ArrayList; 
-import java.util.List; 
 import java.util.Random; 
 
 /* class IndexListChromosome: representasi kromosom yang menyimpan p indeks sel kosong tempat fire station berada */
@@ -73,61 +70,6 @@ public class IndexListChromosome implements Chromosome { // mendeklarasikan clas
     public Chromosome copy() { // method untuk menyalin kromosom
         return new IndexListChromosome(grid, genes); // kembalikan objek kromosom baru dengan gen yang sama
     } 
-
-    @Override
-    public Chromosome crossover(Chromosome other, GAConfig.CrossoverType type, Random random) { // method pindah silang
-        if (!(other instanceof IndexListChromosome)) { // cek apakah tipe kromosom lain sama
-            throw new IllegalArgumentException("crossover harus menggunakan representasi kromosom yang sama"); // error jika beda
-        } 
-        int[] otherGenes = other.decode(); // ambil gen dari kromosom pasangan
-        int[] childGenes = new int[grid.p]; // buat array untuk gen anak
-
-        if (type == GAConfig.CrossoverType.ONE_POINT) { // cek jika pakai one point crossover
-            // ambil bagian depan dari parent pertama dan bagian belakang dari parent kedua
-            int cut = random.nextInt(grid.p + 1); // tentukan titik potong secara acak
-            for (int i = 0; i < grid.p; i++) { // perulangan mengisi gen anak
-                childGenes[i] = (i < cut) ? genes[i] : otherGenes[i]; // ambil dari parent 1 atau parent 2
-            } 
-        } else { // jika pakai uniform crossover
-            // uniform crossover memilih gen dari parent pertama atau kedua secara acak
-            for (int i = 0; i < grid.p; i++) { // perulangan mengisi gen anak
-                childGenes[i] = random.nextBoolean() ? genes[i] : otherGenes[i]; // pilih acak dari parent 1 atau 2
-            } 
-        } 
-
-        // repair menghilangkan indeks duplikat dan menjaga jumlah gen tetap p
-        childGenes = Repair.repairIndices(childGenes, grid, random); // panggil class repair untuk memperbaiki gen anak
-        return new IndexListChromosome(grid, childGenes); // kembalikan objek kromosom anak yang baru
-    } 
-
-    @Override
-    public void mutate(GAConfig.MutationType type, Random random) { // method mutasi kromosom
-        if (grid.p == 0 || grid.p == grid.numEmpty) { // cek jika jumlah p 0 atau sama dengan sel kosong
-            return; // tidak ada perpindahan yang mungkin dilakukan, langsung keluar
-        } 
-
-        int moves = (type == GAConfig.MutationType.MOVE_TWO) ? 2 : 1; // tentukan jumlah perpindahan berdasarkan tipe mutasi
-        for (int move = 0; move < moves; move++) { // perulangan sebanyak jumlah moves
-            List<Integer> available = new ArrayList<>(); // buat list untuk sel kosong yang belum dipakai
-            boolean[] used = new boolean[grid.numEmpty]; // buat array penanda sel terpakai
-            for (int gene : genes) { // tandai gen yang sedang aktif
-                used[gene] = true; // set true pada sel yang jadi fire station
-            } 
-            for (int i = 0; i < grid.numEmpty; i++) { // kumpulkan sel kosong yang belum dipakai
-                if (!used[i]) { // jika sel belum dipakai
-                    available.add(i); // masukkan ke list available
-                } 
-            } 
-            if (available.isEmpty()) { // jika tidak ada sel kosong tersisa
-                break; 
-            } 
-            int genePosition = random.nextInt(grid.p); // pilih posisi gen yang mau diubah secara acak
-            int replacement = available.get(random.nextInt(available.size())); // pilih pengganti acak dari list available
-            genes[genePosition] = replacement; // ganti gen lama dengan yang baru
-        } 
-        java.util.Arrays.sort(genes); // urutkan kembali array gen agar rapi
-    } 
-
     @Override
     public String toString() { // method mengubah objek ke bentuk string
         return java.util.Arrays.toString(genes); // kembalikan representasi string dari array gen
